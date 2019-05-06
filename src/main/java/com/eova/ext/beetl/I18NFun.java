@@ -1,0 +1,33 @@
+/**
+ * Copyright (c) 2013-2016, czhang. All rights reserved.
+ *
+ * Licensed under the GPL license: http://www.gnu.org/licenses/gpl.txt
+ * To use it on other terms please contact us at 1623736450@qq.com
+ */
+package com.eova.ext.beetl;
+
+import org.beetl.core.Context;
+import org.beetl.core.Function;
+
+import com.eova.i18n.I18NBuilder;
+
+/**
+ * JSON字符串转对象
+ * 
+ * @author czhang
+ * @date 2018-5-23
+ */
+public class I18NFun implements Function {
+	@Override
+	public Object call(Object[] paras, Context ctx) {
+		if (paras.length != 1) {
+			throw new RuntimeException("参数错误，请传入一个JSON字符串");
+		}
+		Object para = paras[0];
+		if (para == null) {
+			return null;
+		}
+		String key = para.toString();
+		return I18NBuilder.get(key);
+	}
+}
